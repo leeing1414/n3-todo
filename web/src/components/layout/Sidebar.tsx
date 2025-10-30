@@ -6,18 +6,18 @@ interface SidebarProps {
 
 const Sidebar = ({ projects }: SidebarProps) => {
   return (
-    <aside className="hidden lg:flex w-72 flex-col border-r border-slate-800 bg-slate-900/70 glass-panel text-slate-100">
+    <aside className="hidden w-72 flex-col border-r border-slate-800 bg-slate-900/70 text-slate-100 lg:flex">
       <div className="p-6 border-b border-slate-800">
         <h1 className="text-xl font-semibold tracking-tight">N3 업무 허브</h1>
         <p className="mt-2 text-sm text-slate-400">조직 프로젝트와 업무를 한 화면에서</p>
       </div>
-      <nav className="flex-1 overflow-y-auto p-4 space-y-6">
+      <nav className="flex-1 overflow-y-auto space-y-6 p-4">
         <div>
           <h2 className="text-xs uppercase tracking-wide text-slate-500">프로젝트</h2>
           <ul className="mt-3 space-y-2 text-sm">
             {projects.map((project) => (
-              <li key={project.id} className="rounded-lg bg-slate-800/40 px-3 py-2 hover:bg-slate-700/40 transition">
-                <p className="font-medium text-slate-200 line-clamp-1">{project.title}</p>
+              <li key={project.id} className="rounded-lg bg-slate-800/40 px-3 py-2 transition hover:bg-slate-700/40">
+                <p className="line-clamp-1 font-medium text-slate-200">{project.title}</p>
                 <span className="text-xs text-slate-400">{project.status.replace('_', ' ')}</span>
               </li>
             ))}
@@ -29,9 +29,9 @@ const Sidebar = ({ projects }: SidebarProps) => {
         <div>
           <h2 className="text-xs uppercase tracking-wide text-slate-500">빠른 작업</h2>
           <ul className="mt-3 space-y-2 text-sm text-slate-300">
-            <li className="rounded-lg border border-slate-700 px-3 py-2 hover:border-indigo-400 hover:text-indigo-300 transition">새 프로젝트 생성</li>
-            <li className="rounded-lg border border-slate-700 px-3 py-2 hover:border-indigo-400 hover:text-indigo-300 transition">업무 템플릿 관리</li>
-            <li className="rounded-lg border border-slate-700 px-3 py-2 hover:border-indigo-400 hover:text-indigo-300 transition">팀 멤버 초대</li>
+            <li className="rounded-lg border border-slate-700 px-3 py-2 transition hover:border-indigo-400 hover:text-indigo-300">새 프로젝트 생성</li>
+            <li className="rounded-lg border border-slate-700 px-3 py-2 transition hover:border-indigo-400 hover:text-indigo-300">업무 템플릿 관리</li>
+            <li className="rounded-lg border border-slate-700 px-3 py-2 transition hover:border-indigo-400 hover:text-indigo-300">팀 멤버 초대</li>
           </ul>
         </div>
       </nav>

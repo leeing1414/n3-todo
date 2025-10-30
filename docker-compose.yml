@@ -25,6 +25,8 @@ services:
       - .env
     environment:
       MONGO_DB_URL: mongodb://mongo:27017
+      WATCHFILES_FORCE_POLLING: "true"
+      WATCHFILES_POLLING_INTERVAL: "500"
     ports:
       - "8000:8000"
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
@@ -43,6 +45,8 @@ services:
       - web_node_modules:/workspace/node_modules
     environment:
       VITE_API_BASE_URL: http://localhost:8000
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "500"
     ports:
       - "5173:5173"
     command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"

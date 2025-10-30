@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react';
 
+import LoginForm from '@components/auth/LoginForm';
 import CalendarView from '@components/calendar/CalendarView';
 import ActivityTimeline from '@components/dashboard/ActivityTimeline';
 import DepartmentWorkloadChart from '@components/dashboard/DepartmentWorkloadChart';
@@ -11,11 +12,17 @@ import Header from '@components/layout/Header';
 import PersonalWorkPanel from '@components/personal/PersonalWorkPanel';
 import KanbanBoard from '@components/kanban/KanbanBoard';
 import TaskTable from '@components/table/TaskTable';
+import { useAuthStore } from '@store/useAuthStore';
 import { useProjectStore } from '@store/useProjectStore';
 
 const DEMO_USER_ID = 'demo-user';
 
 const App = () => {
+  const { user, logout } = useAuthStore((state) => ({
+    user: state.user,
+    logout: state.logout,
+  }));
+
   const {
     projects,
     dashboard,
@@ -37,25 +44,31 @@ const App = () => {
   }));
 
   useEffect(() => {
+    if (!user) return;
     void fetchDashboard();
     void fetchProjects();
-  }, [fetchDashboard, fetchProjects]);
+  }, [fetchDashboard, fetchProjects, user]);
 
   useEffect(() => {
+    if (!user) return;
     projects.slice(0, 4).forEach((project) => {
       if (!tasks[project.id]) {
         void fetchTasks(project.id);
       }
     });
-  }, [projects, tasks, fetchTasks]);
+  }, [projects, tasks, fetchTasks, user]);
 
   const allTasks = useMemo(() => Object.values(tasks).flat(), [tasks]);
+
+  if (!user) {
+    return <LoginForm />;
+  }
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100">
       <Sidebar projects={projects} />
       <div className="flex flex-1 flex-col">
-        <Header />
+        <Header userName={user.nickname} department={user.department} onLogout={logout} />
         <main className="flex-1 space-y-6 overflow-y-auto bg-transparent p-6">
           <SummaryCards summary={dashboard} loading={loading} />
 

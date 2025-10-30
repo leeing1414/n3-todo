@@ -11,6 +11,7 @@ class UserDocument(AuditDocument):
     email: str
     name: str
     role: UserRole
+    department: str | None = None
     department_id: ObjectId | None = None
     title: str | None = None
     phone: str | None = None

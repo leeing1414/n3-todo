@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+﻿import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 interface DepartmentWorkloadChartProps {
   data: Array<Record<string, unknown>>;
@@ -6,14 +6,14 @@ interface DepartmentWorkloadChartProps {
 
 const DepartmentWorkloadChart = ({ data }: DepartmentWorkloadChartProps) => {
   const chartData = data.map((item, index) => ({
-    name: String(item.department_id ?? `조직 ${index + 1}`),
+    name: String(item.department_name ?? `Department ${index + 1}`),
     value: Number(item.count ?? 0),
   }));
 
   return (
     <section className="glass-panel rounded-3xl border border-slate-800 p-6">
-      <h4 className="text-lg font-semibold text-slate-100">부서별 프로젝트 부담</h4>
-      <p className="text-sm text-slate-400">진행 중인 프로젝트 수 기준</p>
+      <h4 className="text-lg font-semibold text-slate-100">Projects by Department</h4>
+      <p className="text-sm text-slate-400">Active project distribution</p>
       <div className="mt-4 h-64">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData}>
@@ -22,7 +22,7 @@ const DepartmentWorkloadChart = ({ data }: DepartmentWorkloadChartProps) => {
             <YAxis stroke="#94a3b8" tickLine={false} axisLine={false} />
             <Tooltip
               contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: 12 }}
-              formatter={(value: number) => `${value.toLocaleString()}건`}
+              formatter={(value: number) => `${value.toLocaleString()} projects`}
             />
             <Bar dataKey="value" fill="url(#workloadGradient)" radius={[12, 12, 12, 12]} />
             <defs>

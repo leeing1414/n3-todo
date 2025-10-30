@@ -19,13 +19,7 @@ const ProjectStatusChart = ({ data }: ProjectStatusChartProps) => {
       <div className="mt-4 h-64">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
-            <Pie
-              data={chartData}
-              innerRadius={60}
-              outerRadius={90}
-              paddingAngle={3}
-              dataKey="value"
-            >
+            <Pie data={chartData} innerRadius={60} outerRadius={90} paddingAngle={3} dataKey="value">
               {chartData.map((_, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
@@ -34,11 +28,7 @@ const ProjectStatusChart = ({ data }: ProjectStatusChartProps) => {
               contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: 12 }}
               formatter={(value: number) => `${value.toLocaleString()}건`}
             />
-            <Legend
-              verticalAlign="bottom"
-              height={36}
-              wrapperStyle={{ color: '#cbd5f5' }}
-            />
+            <Legend verticalAlign="bottom" height={36} wrapperStyle={{ color: '#cbd5f5' }} />
           </PieChart>
         </ResponsiveContainer>
       </div>

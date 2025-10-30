@@ -1,7 +1,9 @@
 ﻿from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 
 from app.collections.activity_collection import ActivityCollection
 from app.collections.company_collection import CompanyCollection
@@ -19,6 +21,7 @@ from app.routers.project_router import router as project_router
 from app.routers.subtask_router import router as subtask_router
 from app.routers.task_router import router as task_router
 from app.routers.user_router import router as user_router
+from app.base.base_response import BaseResponse
 
 
 @asynccontextmanager
@@ -57,3 +60,57 @@ app.include_router(activity_router)
 @app.get("/")
 async def root() -> dict[str, str]:
     return {"message": "N3 Todo platform API"}
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(
+    request: Request, exc: RequestValidationError
+) -> JSONResponse:
+    """Return a structured, user-friendly validation response."""
+    field_labels = {
+        "identifier": "아이디",
+        "email": "이메일",
+        "username": "아이디",
+        "password": "비밀번호",
+        "name": "이름",
+        "department": "부서",
+    }
+    errors: list[dict[str, str]] = []
+    for error in exc.errors():
+        raw_path = [
+            str(item)
+            for item in error.get("loc", [])
+            if item not in {"body", "query", "path"}
+        ]
+        field = raw_path[-1] if raw_path else "요청"
+        label = field_labels.get(field, field)
+        error_type = error.get("type", "")
+        ctx = error.get("ctx") or {}
+        message = error.get("msg", "잘못된 값입니다.")
+
+        if error_type == "string_too_short":
+            limit = ctx.get("min_length") or ctx.get("limit_value")
+            message = f"{limit}자 이상 입력해야 합니다."
+        elif error_type == "string_too_long":
+            limit = ctx.get("max_length") or ctx.get("limit_value")
+            message = f"{limit}자 이하로 입력해야 합니다."
+        elif error_type in {"missing", "value_error.missing"}:
+            message = "필수 항목입니다."
+
+        errors.append(
+            {
+                "field": field,
+                "label": label,
+                "message": message,
+            }
+        )
+
+    primary_detail = (
+        f"{errors[0]['label']} 항목 오류: {errors[0]['message']}" if errors else "잘못된 요청입니다."
+    )
+    response_body = BaseResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        detail=primary_detail,
+        data={"errors": errors} if errors else None,
+    )
+    return JSONResponse(content=response_body.model_dump(), status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)

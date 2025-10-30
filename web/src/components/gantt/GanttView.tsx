@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import type { Task } from '@types/index';
+﻿import { useEffect, useRef } from "react";
+import type { Task } from "@types/index";
 
 const GanttView = ({ tasks }: { tasks: Task[] }) => {
   const ganttRef = useRef<HTMLDivElement | null>(null);
@@ -8,7 +8,7 @@ const GanttView = ({ tasks }: { tasks: Task[] }) => {
     if (!ganttRef.current) return;
 
     (async () => {
-      const { default: Gantt } = await import('frappe-gantt');
+      const { default: Gantt } = await import("frappe-gantt");
       const ganttTasks = tasks
         .filter((task) => task.start_date && task.due_date)
         .map((task) => ({
@@ -27,7 +27,7 @@ const GanttView = ({ tasks }: { tasks: Task[] }) => {
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const gantt = new Gantt(ganttRef.current, ganttTasks, {
-        view_mode: 'Week',
+        view_mode: "Week",
         custom_popup_html: (task: any) => `
           <div class="rounded-xl border border-slate-800 bg-slate-900/90 p-3 text-left text-sm">
             <h6 class="text-slate-100 font-semibold">${task.name}</h6>

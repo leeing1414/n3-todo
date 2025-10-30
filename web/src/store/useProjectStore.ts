@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+﻿import { create } from 'zustand';
 import api from '@lib/api';
 import type {
   Activity,
@@ -23,7 +23,7 @@ interface ProjectStoreState {
   fetchSubtasks: (taskId: string) => Promise<void>;
 }
 
-export const useProjectStore = create<ProjectStoreState>((set, get) => ({
+export const useProjectStore = create<ProjectStoreState>((set) => ({
   projects: [],
   tasks: {},
   subtasks: {},

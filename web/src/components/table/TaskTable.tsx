@@ -18,7 +18,11 @@ const TaskTable = ({ tasks }: TaskTableProps) => {
       }),
       columnHelper.accessor('status', {
         header: '상태',
-        cell: (info) => <span className="rounded-full bg-slate-800/60 px-2 py-1 text-xs capitalize text-indigo-300">{info.getValue().replace('_', ' ')}</span>,
+        cell: (info) => (
+          <span className="rounded-full bg-slate-800/60 px-2 py-1 text-xs capitalize text-indigo-300">
+            {info.getValue().replace('_', ' ')}
+          </span>
+        ),
       }),
       columnHelper.accessor('priority', {
         header: '우선순위',
@@ -63,7 +67,7 @@ const TaskTable = ({ tasks }: TaskTableProps) => {
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <th key={header.id} className="px-4 py-3 text-left font-medium uppercase tracking-wide text-xs text-slate-400">
+                  <th key={header.id} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wide text-slate-400">
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </th>
                 ))}

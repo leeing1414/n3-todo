@@ -1,4 +1,4 @@
-﻿from bson import ObjectId
+from bson import ObjectId
 
 from app.collections.user_collection import UserCollection
 from app.documents.user_document import UserDocument
@@ -26,6 +26,7 @@ class UserService:
             title=request.title,
             phone=request.phone,
             avatar_url=request.avatar_url,
+            department=None,
             timezone=request.timezone,
             password_hash=hash_password(request.password),
             created_by=actor_id,

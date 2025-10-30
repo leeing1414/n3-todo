@@ -48,6 +48,7 @@ def map_user(raw: dict[str, Any]) -> UserDTO:
         "email",
         "name",
         "role",
+        "department",
         "department_id",
         "title",
         "phone",

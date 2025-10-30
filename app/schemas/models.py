@@ -41,6 +41,7 @@ class UserDTO(BaseModel):
     email: str
     name: str
     role: UserRole
+    department: str | None = None
     department_id: str | None = None
     title: str | None = None
     phone: str | None = None
