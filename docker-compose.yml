@@ -1,0 +1,52 @@
+﻿version: "3.9"
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: n3-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+    container_name: n3-backend
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    volumes:
+      - ./app:/workspace/app
+      - ./requirements.txt:/workspace/requirements.txt:ro
+    env_file:
+      - .env
+    environment:
+      MONGO_DB_URL: mongodb://mongo:27017
+    ports:
+      - "8000:8000"
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+    container_name: n3-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    working_dir: /workspace
+    volumes:
+      - ./web:/workspace
+      - web_node_modules:/workspace/node_modules
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+
+volumes:
+  mongo_data:
+  web_node_modules:

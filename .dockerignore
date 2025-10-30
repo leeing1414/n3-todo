@@ -1,0 +1,21 @@
+﻿# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Environment files
+.env
+.venv/
+venv/
+
+# Node artifacts
+node_modules/
+web/node_modules/
+web/dist/
+
+# OS / Git
+.DS_Store
+.git/
+.gitignore

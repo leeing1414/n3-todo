@@ -1,4 +1,4 @@
-﻿import { Pie, PieChart, ResponsiveContainer, Cell, Legend, Tooltip } from 'recharts';
+import { Pie, PieChart, ResponsiveContainer, Cell, Legend, Tooltip } from 'recharts';
 
 interface ProjectStatusChartProps {
   data: Array<Record<string, unknown>>;

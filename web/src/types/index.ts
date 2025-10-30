@@ -1,4 +1,4 @@
-﻿export type ProjectStatus = 'planned' | 'in_progress' | 'completed' | 'on_hold' | 'cancelled';
+export type ProjectStatus = 'planned' | 'in_progress' | 'completed' | 'on_hold' | 'cancelled';
 export type ProjectPriority = 'low' | 'medium' | 'high' | 'critical';
 export type ProjectRisk = 'low' | 'medium' | 'high';
 export type TaskStatus = 'todo' | 'in_progress' | 'review' | 'blocked' | 'done';

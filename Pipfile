@@ -1,0 +1,21 @@
+﻿[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[requires]
+python_version = "3.11"
+
+[packages]
+fastapi = "^0.111.0"
+uvicorn = {extras = ["standard"], version = "^0.30.0"}
+motor = "^3.3.2"
+pydantic = "^2.7.0"
+pydantic-settings = "^2.3.0"
+PyJWT = "^2.9.0"
+
+[dev-packages]
+types-requests = "^2.32.0.20241016"
+
+[scripts]
+start = "uvicorn app.main:app --reload --port 8000"

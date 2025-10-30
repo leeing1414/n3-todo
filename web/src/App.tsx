@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import CalendarView from '@components/calendar/CalendarView';
 import ActivityTimeline from '@components/dashboard/ActivityTimeline';

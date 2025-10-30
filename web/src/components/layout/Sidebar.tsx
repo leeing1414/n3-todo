@@ -1,4 +1,4 @@
-﻿import type { Project } from '@types/index';
+import type { Project } from '@types/index';
 
 interface SidebarProps {
   projects: Project[];

@@ -1,4 +1,4 @@
-﻿import { format } from 'date-fns';
+import { format } from 'date-fns';
 
 import type { DashboardSummary } from '@types/index';
 
