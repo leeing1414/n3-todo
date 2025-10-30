@@ -1,0 +1,189 @@
+@charset "UTF-8";
+
+/* fonts */
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 900;
+	font-display: swap;
+	src: local('Pretendard Black'), url(../fonts/woff2/Pretendard-Black.woff2) format('woff2'), url(../fonts/woff/Pretendard-Black.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 800;
+	font-display: swap;
+	src: local('Pretendard ExtraBold'), url(../fonts/woff2/Pretendard-ExtraBold.woff2) format('woff2'), url(../fonts/woff/Pretendard-ExtraBold.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 700;
+	font-display: swap;
+	src: local('Pretendard Bold'), url(../fonts/woff2/Pretendard-Bold.woff2) format('woff2'), url(../fonts/woff/Pretendard-Bold.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 600;
+	font-display: swap;
+	src: local('Pretendard SemiBold'), url(../fonts/woff2/Pretendard-SemiBold.woff2) format('woff2'), url(../fonts/woff/Pretendard-SemiBold.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 500;
+	font-display: swap;
+	src: local('Pretendard Medium'), url(../fonts/woff2/Pretendard-Medium.woff2) format('woff2'), url(../fonts/woff/Pretendard-Medium.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 400;
+	font-display: swap;
+	src: local('Pretendard Regular'), url(../fonts/woff2/Pretendard-Regular.woff2) format('woff2'), url(../fonts/woff/Pretendard-Regular.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 300;
+	font-display: swap;
+	src: local('Pretendard Light'), url(../fonts/woff2/Pretendard-Light.woff2) format('woff2'), url(../fonts/woff/Pretendard-Light.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 200;
+	font-display: swap;
+	src: local('Pretendard ExtraLight'), url(../fonts/woff2/Pretendard-ExtraLight.woff2) format('woff2'), url(../fonts/woff/Pretendard-ExtraLight.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 100;
+	font-display: swap;
+	src: local('Pretendard Thin'), url(../fonts/woff2/Pretendard-Thin.woff2) format('woff2'), url(../fonts/woff/Pretendard-Thin.woff) format('woff');
+}
+
+
+/* color */
+:root {
+	--Main: #002E5F;
+	--Point: #FF7409;
+  --White: #FFFFFF;
+  --Balck: #111111;
+	--Blue: #0458F9;
+	--Green: #4B9228;
+	--Purple: #7F5BFA;
+	--Red: #E24243;
+	--gray_text: #9CA3AF;
+	--sub_gray_00: #F9F9F9;
+	--sub_gray_0: #F6F6F6;
+	--sub_gray_1: #E7E7E7;
+	--sub_gray_2: #D4D4D4;
+	--sub_gray_4: #A6A6A6;
+	--sub_gray_5: #808080;
+	--sub_gray_6: #232323;
+	--gray_blue: #676A79;
+}
+
+/* common */
+*, ::after, ::before { box-sizing:border-box; }
+html, body {width:100%;height:100%;margin:0;padding:0;font-size:16px;}
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section { display: block;}
+body { margin:0; font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;}
+h1, h2, h3, h4, h5, h6 { margin-top:0; margin-bottom:0; font-weight:600; line-height:1.2; font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;}
+
+.h1, h1 { font-size: 2.5rem;}
+.h2, h2 { font-size: 2rem; }
+.h3, h3 { font-size: 1.75rem; }
+.h4, h4 { font-size: 1.5rem; }
+.h5, h5 { font-size: 1.25rem; }
+.h6, h6 { font-size: 1.2rem; }
+
+/* tablet */
+@media (max-width: 1280px){
+    .h1, h1 { font-size: 2.5rem;}
+    .h2, h2 { font-size: 2rem; }
+    .h3, h3 { font-size: 1.75rem; }
+    .h4, h4 { font-size: 1.5rem; }
+    .h5, h5 { font-size: 1.25rem; }
+    .h6, h6 { font-size: 1.2rem; }
+}
+
+p, dl, ol, ul { margin-top:0px; margin-bottom:0; }
+ul { list-style: none; margin:0; padding:0; }
+ul li, ol li { margin-bottom:0; }
+
+a { color: #333F54; text-decoration: none; }
+a:hover { text-decoration: none; }
+a, a:hover, a:focus {outline:none; text-decoration: none; cursor: pointer;}
+a.link:hover {text-decoration: underline;}
+
+button, input, select, textarea { margin:0; font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; font-size:inherit; line-height: inherit; }
+button, input { overflow:visible;}
+/*button {margin:0 1px;}*/
+textarea { overflow: auto; resize: none; }
+fieldset { min-width:0; padding:0; margin:0; border:0;}
+
+[type=button], [type=reset], [type=submit], button { -webkit-appearance: button; cursor:pointer;}
+[type=button]:disabled, [type=reset]:disabled, [type=submit]:disabled, button:disabled { cursor: not-allowed; pointer-events: none; opacity: 0.6; background:#ccc; border-color:#666; color:#666;}
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) { cursor: pointer; }
+
+input[type=checkbox], input[type=radio] {box-sizing: border-box; padding: 0; margin:-4px 0 0; margin-top:1px \9; line-height:normal;}
+input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus { outline: thin solid #0075ff; outline: 5px auto -webkit-focus-ring-color; outline-offset: -2px; }
+input[type="time"], input[type="date"] {background:#fff;}
+input[type="time"] {height:29.8px; line-height:normal;}
+
+img {
+    user-drag: none; /* Safari/Chrome */
+    user-select: none; /* 드래그 선택 방지 */
+    -webkit-user-drag: none; /* 구버전 WebKit */
+}
+
+/* file attach */
+.input-file { display:inline-block;}
+.input-file label { position:relative; cursor:pointer; display:inline-block; vertical-align:middle; overflow:hidden; padding:4px 8px; background:#939393;color:#fff;text-align:center; border-radius:4px; font-size:.85rem; border:1px solid #7e7e7e; line-height:1.5;}
+.input-file label:hover {background-color: #7e7e7e; border: 1px solid #666666;}
+.input-file label input { position:absolute; width:0; height:0; overflow:hidden;}
+.input-file input[type=text], .input-file input[type=file] { vertical-align:middle; display:inline-block; padding:0; border:none; outline:none; cursor: default; background-color: transparent;}
+
+select[multiple] {height: auto;}
+select::-ms-expand { /* IE11 */
+  display: none;
+  background:white; border:none;
+}
+select {
+    -webkit-appearance: none; /* Webkit */
+    -moz-appearance: none; /* FF */
+    -ms-appearance: none; /* Edge */
+    appearance: none; /* Future */
+    /* padding: 2px .3rem 4px .6rem !important; */
+    border: 1px solid currentColor;
+    background: white;
+    border-radius: 3px;
+    font-size: inherit;
+    background-repeat: no-repeat;
+    background-position: right 32px center;
+    background-size: 1em;
+    background-image: url("../images/select_arrow_down.svg");
+    min-width:60px;
+    height:28px;
+}
+select:focus {
+  background-image: url("../images/select_arrow_up.svg");
+}
+
+.checkbox label, .radio label { vertical-align: middle; padding-right:10px;}
+
+img, a img, td input,td select,td img{vertical-align:middle; border-style:none;}
+
+table { border-collapse: collapse; }
+table th { white-space: nowrap; }
+table th, table td { font-size:14px;}
+caption { display:none;}
+
+hr { margin-top: 1rem; margin-bottom: 1rem; border: 0; border-top: 1px solid rgba(0, 0, 0, .1); }
+
+b, .b, strong { font-weight: 800;}
+label { display:inline-block; }
+mark {font-weight: 600; color: inherit; background:0 0;}
