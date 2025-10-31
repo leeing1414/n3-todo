@@ -38,7 +38,7 @@ class DepartmentDTO(BaseModel):
 
 class UserDTO(BaseModel):
     id: str
-    email: str
+    login_id: str
     name: str
     role: UserRole
     department: str | None = None

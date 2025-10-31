@@ -1,10 +1,11 @@
 ﻿from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request, status
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from app.base.base_response import BaseResponse
 from app.collections.activity_collection import ActivityCollection
 from app.collections.company_collection import CompanyCollection
 from app.collections.department_collection import DepartmentCollection
@@ -12,6 +13,7 @@ from app.collections.project_collection import ProjectCollection
 from app.collections.subtask_collection import SubtaskCollection
 from app.collections.task_collection import TaskCollection
 from app.collections.user_collection import UserCollection
+from app.core.settings import settings
 from app.routers.activity_router import router as activity_router
 from app.routers.auth_router import router as auth_router
 from app.routers.company_router import router as company_router
@@ -21,7 +23,6 @@ from app.routers.project_router import router as project_router
 from app.routers.subtask_router import router as subtask_router
 from app.routers.task_router import router as task_router
 from app.routers.user_router import router as user_router
-from app.base.base_response import BaseResponse
 
 
 @asynccontextmanager
@@ -38,9 +39,11 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="N3 Todo Platform", version="1.0.0", lifespan=lifespan)
 
+ALLOWED_CORS_ORIGINS = settings.CORS_ALLOW_ORIGINS or ["http://localhost:5173", "http://127.0.0.1:5173"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -69,6 +72,7 @@ async def validation_exception_handler(
     """Return a structured, user-friendly validation response."""
     field_labels = {
         "identifier": "아이디",
+        "login_id": "아이디",
         "email": "이메일",
         "username": "아이디",
         "password": "비밀번호",
@@ -86,7 +90,7 @@ async def validation_exception_handler(
         label = field_labels.get(field, field)
         error_type = error.get("type", "")
         ctx = error.get("ctx") or {}
-        message = error.get("msg", "잘못된 값입니다.")
+        message = error.get("msg", "잘못된 요청입니다.")
 
         if error_type == "string_too_short":
             limit = ctx.get("min_length") or ctx.get("limit_value")

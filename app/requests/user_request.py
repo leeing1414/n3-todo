@@ -1,8 +1,8 @@
-﻿from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, Field
 
 
 class UserCreateRequest(BaseModel):
-    email: EmailStr
+    login_id: str = Field(..., min_length=1)
     name: str
     role: str = Field(default="member")
     department_id: str | None = None
@@ -14,6 +14,7 @@ class UserCreateRequest(BaseModel):
 
 
 class UserUpdateRequest(BaseModel):
+    login_id: str | None = None
     name: str | None = None
     role: str | None = None
     department_id: str | None = None

@@ -6,9 +6,9 @@ class LoginRequest(BaseModel):
 
     identifier: str = Field(
         ...,
-        description="User login identifier (email or username)",
+        description="로그인에 사용할 아이디",
         min_length=1,
-        validation_alias=AliasChoices("email", "username"),
+        validation_alias=AliasChoices("login_id", "email", "username"),
     )
     password: str = Field(..., description="User password", min_length=8)
 
@@ -18,9 +18,9 @@ class RegisterRequest(BaseModel):
 
     identifier: str = Field(
         ...,
-        description="Desired login identifier (email or username)",
+        description="생성할 로그인 아이디",
         min_length=1,
-        validation_alias=AliasChoices("email", "username"),
+        validation_alias=AliasChoices("login_id", "email", "username"),
     )
     name: str = Field(..., description="Display name for the user", min_length=1)
     password: str = Field(..., description="Account password", min_length=8)

@@ -1,5 +1,6 @@
-﻿import base64
+import base64
 import hashlib
+import hmac
 import os
 from datetime import datetime, timedelta, timezone
 from typing import Any
@@ -26,7 +27,8 @@ def verify_password(password: str, encoded: str) -> bool:
         return False
     salt, digest = decoded[:16], decoded[16:]
     candidate = _pbkdf2(password, salt)
-    return hashlib.compare_digest(candidate, digest)
+    # hmac.compare_digest는 타이밍 공격을 방지하며 안전하게 비교
+    return hmac.compare_digest(candidate, digest)
 
 
 def create_access_token(

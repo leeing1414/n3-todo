@@ -22,7 +22,7 @@ class AuthService:
         expires = timedelta(minutes=60)
         token = create_access_token(
             subject=user.id,
-            additional_claims={"role": user.role.value, "email": user.email},
+            additional_claims={"role": user.role.value, "login_id": user.login_id},
             expires_delta=expires,
         )
         return TokenDTO(
@@ -35,14 +35,14 @@ class AuthService:
 
     @staticmethod
     async def register(request: RegisterRequest) -> UserDTO:
-        existing = await UserCollection.find_raw_by_email(request.identifier)
+        existing = await UserCollection.find_raw_by_login_id(request.identifier)
         if existing:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Username is already taken.",
+                detail="이미 사용 중인 아이디입니다.",
             )
         document = UserDocument(
-            email=request.identifier,
+            login_id=request.identifier,
             name=request.name,
             role=UserRole.member,
             department=request.department,
@@ -53,6 +53,6 @@ class AuthService:
         if not created:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="Failed to load user after creation.",
+                detail="사용자 정보를 불러오지 못했습니다.",
             )
         return mappers.map_user(created)

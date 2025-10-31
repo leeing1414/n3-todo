@@ -17,7 +17,7 @@ class UserService:
     @staticmethod
     async def create_user(request: UserCreateRequest, *, actor_id: str | None = None) -> UserDTO:
         document = UserDocument(
-            email=request.email,
+            login_id=request.login_id,
             name=request.name,
             role=UserRole(request.role),
             department_id=ObjectId(request.department_id)
@@ -67,8 +67,8 @@ class UserService:
         return await UserCollection.delete(user_id)
 
     @staticmethod
-    async def authenticate(email: str, password: str) -> UserDTO | None:
-        raw_user = await UserCollection.find_raw_by_email(email)
+    async def authenticate(login_id: str, password: str) -> UserDTO | None:
+        raw_user = await UserCollection.find_raw_by_login_id(login_id)
         if not raw_user:
             return None
         password_hash = raw_user.get("password_hash")

@@ -45,7 +45,7 @@ def map_department(raw: dict[str, Any]) -> DepartmentDTO:
 def map_user(raw: dict[str, Any]) -> UserDTO:
     allowed = {
         "id",
-        "email",
+        "login_id",
         "name",
         "role",
         "department",

@@ -8,7 +8,7 @@ from app.schemas.enums import UserRole
 
 @dataclasses.dataclass(kw_only=True, frozen=True)
 class UserDocument(AuditDocument):
-    email: str
+    login_id: str
     name: str
     role: UserRole
     department: str | None = None
